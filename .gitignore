@@ -1,0 +1,10 @@
+*.dat
+*.dep
+*.mode1v3
+*.pbxuser
+*.perspective
+*.perspectivev3
+*.swp
+*~.nib/
+.DS_Store
+sample/LetsSlide/build/*
