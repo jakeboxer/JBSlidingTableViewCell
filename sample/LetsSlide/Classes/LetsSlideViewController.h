@@ -18,8 +18,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LetsSlideViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface LetsSlideViewController : UIViewController
+<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate> {
 @private
+  NSIndexPath* openedCellIndexPath_;
   NSArray* regularCellStrings_;
   UITableView* tableView_;
 }

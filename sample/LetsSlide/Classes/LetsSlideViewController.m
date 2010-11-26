@@ -21,12 +21,17 @@
 
 @interface LetsSlideViewController ()
 
+@property (nonatomic, readonly) JBSlidingTableViewCell* openedCell;
+@property (nonatomic, retain) NSIndexPath* openedCellIndexPath;
 @property (nonatomic, copy) NSArray* regularCellStrings;
+
+- (void)closeOpenedCell;
 
 @end
 
 @implementation LetsSlideViewController
 
+@synthesize openedCellIndexPath = openedCellIndexPath_;
 @synthesize regularCellStrings = regularCellStrings_;
 @synthesize tableView = tableView_;
 
@@ -37,6 +42,8 @@
   self = [super initWithCoder:aDecoder];
 
   if (nil != self) {
+    openedCellIndexPath_ = nil;
+
     self.regularCellStrings = [NSArray arrayWithObjects:@"First default cell", @"Second default cell", nil];
   }
 
@@ -44,11 +51,43 @@
 }
 
 - (void)dealloc {
+  [openedCellIndexPath_ release];
   [tableView_ release];
 
+  openedCellIndexPath_ = nil;
   tableView_ = nil;
 
   [super dealloc];
+}
+
+#pragma mark -
+#pragma mark Properties
+
+- (JBSlidingTableViewCell*)openedCell {
+  JBSlidingTableViewCell* cell;
+
+  if (nil == self.openedCellIndexPath) {
+    cell = nil;
+  } else {
+    cell = (JBSlidingTableViewCell*)[self.tableView cellForRowAtIndexPath:self.openedCellIndexPath];
+  }
+
+  return cell;
+}
+
+#pragma mark -
+#pragma mark Private Methods
+
+- (void)closeOpenedCell {
+  [self.openedCell closeDrawer];
+  self.openedCellIndexPath = nil;
+}
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewWillBeginDragging:(UIScrollView*)scrollView {
+  [self closeOpenedCell];
 }
 
 #pragma mark -
@@ -85,8 +124,9 @@
 #pragma mark UITableViewDelegate Methods
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-  RegularSlidingTableViewCell* cell = (RegularSlidingTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-  [cell openDrawer];
+  [self closeOpenedCell];
+  [(RegularSlidingTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath] openDrawer];
+  self.openedCellIndexPath = indexPath;
 }
 
 @end
