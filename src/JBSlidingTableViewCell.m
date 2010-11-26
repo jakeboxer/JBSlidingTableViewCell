@@ -31,6 +31,7 @@
 
     // Top drawer
     self.topDrawer = [[[UIView alloc] init] autorelease];
+    self.topDrawer.backgroundColor = [UIColor whiteColor];
     [self.contentView addSubview:self.topDrawer];
   }
 
@@ -66,12 +67,10 @@
 
 - (void)openDrawer {
   self.bottomDrawer = [[[UIView alloc] initWithFrame:self.bounds] autorelease];
+  [self bottomDrawerWillAppear];
   [self insertSubview:self.bottomDrawer belowSubview:self.contentView];
 
-  [self bottomDrawerWillAppear];
-
   CATransition* animation = [CATransition animation];
-  animation.delegate = self;
   animation.type = kCATransitionPush;
   animation.subtype = kCATransitionFromRight;
   animation.duration = 0.2f;

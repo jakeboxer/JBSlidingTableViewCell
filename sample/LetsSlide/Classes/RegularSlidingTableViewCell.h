@@ -1,5 +1,5 @@
 //
-//  LetsSlideViewController.h
+//  RegularSlidingTableViewCell.h
 //  LetsSlide
 //
 //  Copyright 2010 Jake Boxer
@@ -16,15 +16,13 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import <UIKit/UIKit.h>
+#import "JBSlidingTableViewCell.h"
 
-@interface LetsSlideViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface RegularSlidingTableViewCell : JBSlidingTableViewCell {
 @private
-  NSArray* regularCellStrings_;
-  UITableView* tableView_;
+  UILabel* titleLabel_;
 }
 
-@property (nonatomic, retain) IBOutlet UITableView* tableView;
+@property (nonatomic, retain) UILabel* titleLabel;
 
 @end
-

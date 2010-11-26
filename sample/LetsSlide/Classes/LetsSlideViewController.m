@@ -17,59 +17,76 @@
 //  limitations under the License.
 
 #import "LetsSlideViewController.h"
+#import "RegularSlidingTableViewCell.h"
+
+@interface LetsSlideViewController ()
+
+@property (nonatomic, copy) NSArray* regularCellStrings;
+
+@end
 
 @implementation LetsSlideViewController
 
+@synthesize regularCellStrings = regularCellStrings_;
+@synthesize tableView = tableView_;
 
+#pragma mark -
+#pragma mark Creation/Removal Methods
 
-/*
-// The designated initializer. Override to perform setup that is required before the view is loaded.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
+- (id)initWithCoder:(NSCoder*)aDecoder {
+  self = [super initWithCoder:aDecoder];
+
+  if (nil != self) {
+    self.regularCellStrings = [NSArray arrayWithObjects:@"First default cell", @"Second default cell", nil];
+  }
+
+  return self;
 }
-*/
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
-
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-*/
-
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-}
-
 
 - (void)dealloc {
-    [super dealloc];
+  [tableView_ release];
+
+  tableView_ = nil;
+
+  [super dealloc];
+}
+
+#pragma mark -
+#pragma mark UITableViewDataSource Methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
+  return 1;
+}
+
+- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
+  static NSString* CellIdentifier = @"Identifier";
+  UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
+  if (nil == cell) {
+    cell = [[[RegularSlidingTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                               reuseIdentifier:CellIdentifier] autorelease];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+  }
+
+  ((RegularSlidingTableViewCell*)cell).titleLabel.text = [self.regularCellStrings objectAtIndex:indexPath.row];
+
+  return cell;
+}
+
+- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
+  return [self.regularCellStrings count];
+}
+
+- (NSString*)tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section {
+  return @"Regular cells (select to slide)";
+}
+
+#pragma mark -
+#pragma mark UITableViewDelegate Methods
+
+- (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
+  RegularSlidingTableViewCell* cell = (RegularSlidingTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+  [cell openDrawer];
 }
 
 @end
