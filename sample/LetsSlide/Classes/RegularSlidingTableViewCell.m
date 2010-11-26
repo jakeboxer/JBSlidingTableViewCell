@@ -29,10 +29,9 @@
   self = [super initWithStyle:style reuseIdentifier:identifier];
 
   if (nil != self) {
-    self.titleLabel = [[[UILabel alloc] initWithFrame:CGRectMake(8, 14, 304, 20)] autorelease];
+    self.titleLabel = [[[UILabel alloc] initWithFrame:CGRectMake(8, 13, 304, 20)] autorelease];
     self.titleLabel.font = [UIFont boldSystemFontOfSize:17];
     self.titleLabel.textColor = [UIColor blackColor];
-    self.titleLabel.highlightedTextColor = [UIColor whiteColor];
     self.titleLabel.backgroundColor = [UIColor clearColor];
     [self.topDrawer addSubview:self.titleLabel];
   }
@@ -53,6 +52,15 @@
 
 - (void)bottomDrawerWillAppear {
   self.bottomDrawer.backgroundColor = [UIColor lightGrayColor];
+
+  UILabel* bottomDrawerLabel = [[[UILabel alloc] initWithFrame:CGRectMake(8, 13, 304, 20)] autorelease];
+  bottomDrawerLabel.font = [UIFont boldSystemFontOfSize:17];
+  bottomDrawerLabel.textColor = [UIColor colorWithWhite:0.2 alpha:1.0];
+  bottomDrawerLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.75];
+  bottomDrawerLabel.shadowOffset = CGSizeMake(0, 1);
+  bottomDrawerLabel.backgroundColor = [UIColor clearColor];
+  bottomDrawerLabel.text = @"Bottom drawer!";
+  [self.bottomDrawer addSubview:bottomDrawerLabel];
 }
 
 @end
