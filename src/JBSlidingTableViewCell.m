@@ -82,6 +82,17 @@
 }
 
 #pragma mark -
+#pragma mark Callbacks
+
+- (void)bottomDrawerDidDisappear {
+  // Can be overridden by subclasses.
+}
+
+- (void)bottomDrawerWillAppear {
+  // Can be overridden by subclasses.
+}
+
+#pragma mark -
 #pragma mark UIView Methods
 
 - (void)layoutSubviews {
