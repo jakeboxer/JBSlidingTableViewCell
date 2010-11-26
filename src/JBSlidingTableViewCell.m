@@ -12,6 +12,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <QuartzCore/QuartzCore.h>
 #import "JBSlidingTableViewCell.h"
 
 @implementation JBSlidingTableViewCell
@@ -93,8 +94,8 @@
 
 - (void)animationDidStop:(CAAnimation*)anim finished:(BOOL)flag {
   [self bottomDrawerDidDisappear];
-  [self.bottomShelf removeFromSuperview];
-  self.bottomShelf = nil;
+  [self.bottomDrawer removeFromSuperview];
+  self.bottomDrawer = nil;
 }
 
 @end
