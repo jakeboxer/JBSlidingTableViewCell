@@ -20,7 +20,7 @@
 
 @interface RegularSlidingTableViewCell : JBSlidingTableViewCell {
 @private
-  UILabel* titleLabel_;
+  UILabel* _titleLabel;
 }
 
 @property (nonatomic, retain) UILabel* titleLabel;

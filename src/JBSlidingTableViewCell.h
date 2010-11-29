@@ -19,8 +19,8 @@
 
 @interface JBSlidingTableViewCell : UITableViewCell {
 @private
-  UIView* bottomDrawer_;
-  UIView* topDrawer_;
+  UIView* _bottomDrawer;
+  UIView* _topDrawer;
 }
 
 // Callback: Called when the bottom drawer is about to be shown. Add subviews here.

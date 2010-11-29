@@ -31,9 +31,9 @@
 
 @implementation LetsSlideViewController
 
-@synthesize openedCellIndexPath = openedCellIndexPath_;
-@synthesize regularCellStrings = regularCellStrings_;
-@synthesize tableView = tableView_;
+@synthesize openedCellIndexPath = _openedCellIndexPath;
+@synthesize regularCellStrings = _regularCellStrings;
+@synthesize tableView = _tableView;
 
 #pragma mark -
 #pragma mark Creation/Removal Methods
@@ -42,7 +42,7 @@
   self = [super initWithCoder:aDecoder];
 
   if (nil != self) {
-    openedCellIndexPath_ = nil;
+    _openedCellIndexPath = nil;
 
     self.regularCellStrings = [NSArray arrayWithObjects:@"First default cell", @"Second default cell", nil];
   }
@@ -51,11 +51,11 @@
 }
 
 - (void)dealloc {
-  [openedCellIndexPath_ release];
-  [tableView_ release];
+  [_openedCellIndexPath release];
+  [_tableView release];
 
-  openedCellIndexPath_ = nil;
-  tableView_ = nil;
+  _openedCellIndexPath = nil;
+  _tableView = nil;
 
   [super dealloc];
 }

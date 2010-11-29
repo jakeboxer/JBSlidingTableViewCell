@@ -20,7 +20,7 @@
 
 @implementation RegularSlidingTableViewCell
 
-@synthesize titleLabel = titleLabel_;
+@synthesize titleLabel = _titleLabel;
 
 #pragma mark -
 #pragma mark Creation/Removal Methods
@@ -40,9 +40,9 @@
 }
 
 - (void)dealloc {
-  [titleLabel_ release];
+  [_titleLabel release];
 
-  titleLabel_ = nil;
+  _titleLabel = nil;
 
   [super dealloc];
 }

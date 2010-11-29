@@ -21,9 +21,9 @@
 @interface LetsSlideViewController : UIViewController
 <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate> {
 @private
-  NSIndexPath* openedCellIndexPath_;
-  NSArray* regularCellStrings_;
-  UITableView* tableView_;
+  NSIndexPath* _openedCellIndexPath;
+  NSArray* _regularCellStrings;
+  UITableView* _tableView;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView* tableView;
